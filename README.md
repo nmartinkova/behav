@@ -115,10 +115,22 @@ Next, summarize the behaviours.
 ``` r
 sum_events(folder = "folderNameWithScoredBehavioursForAllIndividuals")
 ```
+This is a good place to check for the most coarse errors in scoring the 
+behaviours. The column names should only include the symbols selected
+by the user prior to scoring. If there are other columns, check the respective
+file or score the video again.
 
-## Troubleshooting summaries
+## Behaviour latency
 
-1.  **This doesn’t do anything.**
+To extract latencies of all instances of a specific behaviour from all
+the scored files, prepare the working directory as that used for 
+summarizing behaviours. 
 
-    Send me the folder and the script to reconstruct the problem and fix
-    it.
+``` r
+latency(folder = "folderNameWithScoredBehavioursForAllIndividuals")
+```
+The function will search for all available behaviours scored in all files
+in the folder and present the user with the options to choose from. 
+The choice will be repeated until the user selects from the list.
+`R` is case-sensitive, so make sure to input the behaviour exactly. 
+
