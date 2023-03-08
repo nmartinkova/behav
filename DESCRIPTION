@@ -1,8 +1,8 @@
 Package: behav
 Type: Package
 Title: Score behavioral patterns in time
-Version: 0.4
-Date: 2021-11-22
+Version: 0.4.1
+Date: 2022-12-20
 Authors@R: c( 
     person(given = "Natalia", family = "Martinkova", email = "martinkova@ivb.cz", 
     role = c("aut", "cre", "cph")))
