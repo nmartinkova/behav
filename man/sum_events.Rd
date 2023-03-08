@@ -4,16 +4,28 @@
 \alias{sum_events}
 \title{Summarizes behavioral patterns}
 \usage{
-sum_events(folder = ".", file = "sum.events.txt")
+sum_events(
+  folder = ".",
+  save = FALSE,
+  file = "sum.events.txt",
+  troubleshoot = FALSE
+)
 }
 \arguments{
 \item{folder}{character. Path to a folder that contains the recorded behaviors.}
 
+\item{save}{logical. Whether the results should be saved to a file.}
+
 \item{file}{character. File name where the results will be stored. Make sure to NOT 
-store the results where the behavior recording files are!}
+store the results where the behavior recording files are! Not used if
+\code{save = FALSE}.}
+
+\item{troubleshoot}{logical. Prints current filename if \code{TRUE}.}
 }
 \value{
-Saves results to a file and returns the data.frame invisibly.
+Returns the data.frame with behaviour durations in all files in the folder. 
+    Optionally, saves results of the ethogram with durations of each behaviour to a 
+    file.
 }
 \description{
 Checks all files in a folder and summarizes behaviors recorded in the files. The files
