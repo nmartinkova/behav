@@ -14,7 +14,7 @@
 
 
 latency <- function(folder = ".", behaviour = NA){
-	subory <- dir(folder, full.names = T)
+	subory <- dir(folder, full.names = T, recursive = TRUE)
 	
 	# prepare available behaviours
 	ethogram <- sum_events(folder = folder, save = FALSE)
