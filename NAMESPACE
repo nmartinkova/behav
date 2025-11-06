@@ -3,6 +3,7 @@
 export(bin_duration)
 export(bin_event)
 export(latency)
+export(mergeBoris)
 export(score_events)
 export(sum_events)
 importFrom(plyr,rbind.fill)

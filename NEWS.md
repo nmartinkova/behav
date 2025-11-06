@@ -1,62 +1,54 @@
--------------  2022-12-20  -------------
-v. 0.4.1
+# behav 0.5 (2025-11-05)
 
-* Added recursive file listing
+* Added new function `mergeBoris()` for merging BORIS behavioural observation files
+  exported as `.xlsx` or `.tsv`.
+* Release for Natalie Gabrielova, Faculty of Sciences, Masaryk University.
 
+# behav 0.4.1 (2022-12-20)
 
--------------  2022-10-26  -------------
-
-v. 0.4
-
-* First public release on github
-* Renamed all functions to prevent method registration
+* Added recursive file listing for batch processing.
 
 
+# behav 0.4 (2022-10-26)
 
--------------  2021-11-22  -------------
-
-v. 0.3.4
-
-* Replaced sum_events() with spocitej()
-
--------------  2021-11-22  -------------
-
-v. 0.3.3
-
-* Bug fix
-
--------------  2021-11-22  -------------
-
-v. 0.3.2
-
-* Updated sum_events() to change events to lower case and accept only the first letter of the code
-
--------------  2021-11-22  -------------
-
-v. 0.3.1
-
-* Renamed sum.events() to sum_events() to prevent generic method registration
-* Added vignette
+* First public release on GitHub.
+* Renamed all functions to prevent method registration conflicts.
 
 
--------------  2021-10-18  -------------
+# behav 0.3.4 (2021-11-22)
 
-v. 0.3
-
-* Added function sum.events()
-* Updated file name check in score.events()
+* Replaced `sum_events()` with `spocitej()`.
 
 
--------------  2021-10-18  -------------
+# behav 0.3.3 (2021-11-22)
 
-v. 0.2
-
-* Added documentation
-* Release for Ivo Adam, Faculty of Education, Masaryk University
+* Bug fix.
 
 
--------------  2016-05-06  -------------
+# behav 0.3.2 (2021-11-22)
 
-v. 0.1
+* Updated `sum_events()` to convert event codes to lowercase and
+  accept only the first letter of the code.
 
-* First version, released for Lucie Jakesova, Faculty of Sciences, Masaryk University
+
+# behav 0.3.1 (2021-11-22)
+
+* Renamed `sum.events()` to `sum_events()` to avoid generic method registration.
+* Added vignette.
+
+
+# behav 0.3 (2021-10-18)
+
+* Added function `sum.events()`.
+* Updated file name validation in `score.events()`.
+
+
+# behav 0.2 (2021-10-18)
+
+* Added documentation.
+* Release for Ivo Adam, Faculty of Education, Masaryk University.
+
+
+# behav 0.1 (2016-05-06)
+
+* First version, released for Lucie Jakesova, Faculty of Sciences, Masaryk University.
