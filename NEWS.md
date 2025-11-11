@@ -1,3 +1,7 @@
+# behav 0.5.1 (2025-11-11)
+
+* Added new function `plotrarefaction()` for plotting bootstrapped rarefaction curves.
+
 # behav 0.5 (2025-11-05)
 
 * Added new function `mergeBoris()` for merging BORIS behavioural observation files

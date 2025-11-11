@@ -1,7 +1,7 @@
 Package: behav
 Type: Package
 Title: Score behavioral patterns in time
-Version: 0.5
+Version: 0.5.1
 Authors@R: c( 
     person(given = "Natalia", family = "Martinkova", email = "martinkova@ivb.cz", 
     role = c("aut", "cre", "cph")))
@@ -9,7 +9,8 @@ Author:
     Natalia Martinkova [aut, cre, cph]
 Maintainer: Natalia Martinkova <martinkova@ivb.cz>
 Description: Play video in an external application, score the observed behavioral patterns 
-	in R. Works with one letter or one number codes for different behaviors. 
+	in R. Works with one letter or one number codes for different behaviors. Provides 
+	additional analyses for investigating animal behaviour.
 License: GPL-3
 Depends: R (>= 3.4.0)
 Encoding: UTF-8

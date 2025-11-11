@@ -21,7 +21,7 @@ if(!require("devtools", character.only = TRUE)){
 }
 
 # Install behav from GitHub using devtools. Internet access necessary
-install_github("nmartinkova/behav")
+devtools::install_github("nmartinkova/behav")
 
 # Load the behav package
 require(behav)
