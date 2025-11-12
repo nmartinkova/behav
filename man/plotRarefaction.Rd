@@ -2,25 +2,25 @@
 % Please edit documentation in R/plotRarefaction.r
 \name{plotRarefaction}
 \alias{plotRarefaction}
-\title{Plot behavioural rarefaction curves from BORIS observations}
+\title{Plot behavioural rarefaction curves using time-slice bootstrap resampling}
 \usage{
 plotRarefaction(
   x,
   zoo = c("Zoo", "Beekse", "Safaripark", "Tiergarten"),
   age = c("Mládě", "Zyqarri"),
   cols = c("#3C8ABF", "#A1BCD7", "#768D1A", "#B1BE94"),
-  nBoot = 100
+  nBoot = 500
 )
 }
 \arguments{
-\item{x}{A data frame created by [mergeBoris()], containing columns `animal`, `Behavior`,
-`file`, and `cumDuration`.}
+\item{x}{A data frame created by \code{\link[=mergeBoris]{mergeBoris()}}, containing columns \code{animal}, \code{Behavior},
+\code{file}, and \code{cumDuration}.}
 
 \item{zoo}{Character vector of text patterns used to recognise zoo files
-(default includes `"Zoo"`, `"Beekse"`, `"Safaripark"`, `"Tiergarten"`).}
+(default includes \code{"Zoo"}, \code{"Beekse"}, \code{"Safaripark"}, \code{"Tiergarten"}).}
 
-\item{age}{Character vector of text patterns identifying juveniles in the `animal` column
-(default includes `"Mládě"`, `"Zyqarri"`).}
+\item{age}{Character vector of text patterns identifying juveniles in the \code{animal} column
+(default includes \code{"Mládě"}, \code{"Zyqarri"}).}
 
 \item{cols}{Character vector of four colours used for the groups in order:
 ZOO adult, ZOO juvenile, Wild adult, Wild juvenile.
@@ -31,29 +31,41 @@ tones representing juveniles.}
 A higher number gives smoother confidence intervals but takes longer to compute.}
 }
 \value{
-Invisibly returns the input data frame `x` with extra columns indicating which
-animals were categorised as zoo vs. wild in column `zoo` and adult vs. juvenile in 
-column `age`. The function produces a plot with four curves:
+Invisibly returns the input data frame \code{x} with extra columns indicating which
+animals were categorised as zoo vs. wild in column \code{zoo} and adult vs. juvenile in
+column \code{age}. The function produces a plot with four curves:
 blue tones for zoo animals, green tones for wild animals, solid lines for adults, and
 lighter lines for juveniles.
 }
 \description{
-This function visualises how the number of distinct behaviours increases with observation time
-for different groups of elephants observed in zoos and in the wild. It uses simple bootstrap
-resampling to estimate mean behavioural richness and 95% confidence intervals for each group.
-The function is intended for student use and provides an intuitive comparison of behavioural
-diversity between animals of different origin and age class.
+This function shows how the number of distinct behaviours (behavioural richness)
+increases with observation time for elephants observed in zoos and in the wild.
+It uses a \emph{time-slice bootstrap approach}, where random time windows of increasing
+length are sampled from each recording, and the number of unique behaviours within
+each window is counted. Averaging these results across individuals gives a smooth
+estimate of how rapidly new behaviours appear during observation.
 }
 \details{
-The function divides the dataset into four groups:
-zoo adults, zoo juveniles, wild adults, and wild juveniles.
-For each group, it repeatedly resamples the behavioural observations and counts
-how many unique behaviours are seen at different fractions of the total observation time.
-The results are averaged across individuals and displayed as rarefaction curves with
-shaded 95% confidence intervals.
+The function is designed for student use and provides an intuitive comparison
+of behavioural diversity between animals of different origin (zoo vs. wild)
+and age class (adult vs. juvenile).
 
-This analysis helps visualise how quickly new behaviours appear during observation,
-and compare overall behavioural richness among groups.
+The analysis removes the category \code{"Mimo dohled"} and separates animals into four groups:
+zoo adults, zoo juveniles, wild adults, and wild juveniles.
+For each individual, total observation time is divided into a series of 50
+fractional time slices ranging from 1\% to 100\%.
+For each slice width \emph{w = fT}, where \emph{f} is a fraction and \emph{T} is the total
+observation time for the individuals, random time windows of length \emph{w} are repeatedly drawn
+across the individual’s observation period.
+A behaviour counts as observed in that window if its duration overlaps with the window in time.
+
+For each time slice, the function computes the mean number of unique behaviours and the
+2.5\% and 97.5\% quantiles across bootstrap replicates to form 95\% confidence intervals.
+These curves are then averaged across individuals within each group.
+
+The resulting plot displays the mean behavioural richness (y-axis)
+against the \emph{fraction of total observation time} (x-axis),
+allowing comparisons of how quickly new behaviours appear between groups.
 }
 \examples{
 \dontrun{

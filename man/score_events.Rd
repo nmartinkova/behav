@@ -23,20 +23,21 @@ score the behavior.}
 behavior was recorded.}
 }
 \value{
-Returns data.frame with columns events (codes for recorded behaviors), 
-        stroke.time (elapsed process time when the change in behavior was recorded), time.s 
-        time.s (start of the behavior in seconds from the beginning of recording), and
-        duration (duration of the behavior in seconds).
+Returns data.frame with columns events (codes for recorded behaviors),
+stroke.time (elapsed process time when the change in behavior was recorded), time.s
+time.s (start of the behavior in seconds from the beginning of recording), and
+duration (duration of the behavior in seconds).
 
-        If \code{vect = TRUE}, returns a binary vector for when the selected behavior
-        was recorded.
+\if{html}{\out{<div class="sourceCode">}}\preformatted{    If \code{vect = TRUE}, returns a binary vector for when the selected behavior
+    was recorded.
+}\if{html}{\out{</div>}}
 }
 \description{
-Writes times when the user indicates a behavior started. Optionally converts the 
+Writes times when the user indicates a behavior started. Optionally converts the
 recorded times of the beginnings of specific behaviors to a vector, indicating in what
 seconds the object performed a behavior.
 }
 \note{
 Use \code{vect = TRUE} with \code{save = TRUE}, otherwise recordings of all other
-      behaviors get lost.
+behaviors get lost.
 }

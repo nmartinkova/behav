@@ -2,6 +2,7 @@
 
 export(bin_duration)
 export(bin_event)
+export(calculateMetrics)
 export(latency)
 export(mergeBoris)
 export(plotRarefaction)

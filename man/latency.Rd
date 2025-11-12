@@ -12,8 +12,8 @@ latency(folder = ".", behaviour = NA)
 \item{behaviour}{character. Symbol of a scored behaviour for which to calculate latencies.}
 }
 \value{
-data.frame Saves results of the ethogram with durations of each behaviour in each 
-    experiment to a file and returns the data.frame invisibly.
+data.frame Saves results of the ethogram with durations of each behaviour in each
+experiment to a file and returns the data.frame invisibly.
 }
 \description{
 Checks all files in a folder and calculates latencies of all instances of a user-selected

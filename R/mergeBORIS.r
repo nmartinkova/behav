@@ -54,7 +54,6 @@
 #' importFrom("readxl", "read_excel")
 #' @export
 mergeBoris <- function(files, outputFile) {
-
   # create output directory if missing
   if (basename(outputFile) != outputFile) {
     if (!dir.exists(dirname(outputFile))) dir.create(dirname(outputFile), recursive = TRUE)
@@ -122,8 +121,9 @@ mergeBoris <- function(files, outputFile) {
     }
   }
 
-  vsetko$Behavior <- sub("\r\n", "", vsetko$Behavior, perl = TRUE)
-  vsetko$animal <- sub("\r\n", "", vsetko$animal, perl = TRUE)
+  # remove whitespace around behaviours and animal codes
+  vsetko$Behavior <- sub("^[[:space:]]+|[[:space:]]+$", "", vsetko$Behavior, perl = TRUE)
+  vsetko$animal <- sub("^[[:space:]]+|[[:space:]]+$", "", vsetko$animal, perl = TRUE)
 
   if (is.null(vsetko)) stop("No valid data found in input files.")
   write.table(vsetko, file = outputFile, sep = "\t", row.names = FALSE)

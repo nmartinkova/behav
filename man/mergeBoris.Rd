@@ -22,7 +22,7 @@ not return any object to the R console.
 }
 \description{
 This function reads multiple observation files exported from the BORIS
-software (either Excel `.xlsx` or tab-delimited `.tsv`) and combines them
+software (either Excel \code{.xlsx} or tab-delimited \code{.tsv}) and combines them
 into one table. It calculates for each individual and behaviour the duration
 of each event, its cumulative duration within the recording, and the
 relative frequency of that behaviour. The merged table can then be used for
@@ -37,10 +37,10 @@ consecutive time values.
 
 For each animal–behaviour combination the following variables are returned:
 \itemize{
-  \item \code{duration} – duration of the behavioural event (s),
-  \item \code{cumDuration} – cumulative duration within the observation,
-  \item \code{freq} – relative frequency of the behaviour,
-  \item \code{file} – source file name.
+\item \code{duration} – duration of the behavioural event (s),
+\item \code{cumDuration} – cumulative duration within the observation,
+\item \code{freq} – relative frequency of the behaviour,
+\item \code{file} – source file name.
 }
 
 The output table can be used for further analyses, such as calculating
