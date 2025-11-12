@@ -1,7 +1,8 @@
-# behav 0.5.1 (2025-11-11)
+# behav 0.5.1 (2025-11-12)
 
 * Added new function `plotRarefaction()` for plotting bootstrapped rarefaction curves.
 * Added new function `calculateMetrics()`that calculates diversity metrices for individuals and optionally plots metrics boxplots.
+* Added new function `plotPCA()` for plotting PCA scatterplot and a heatmap of variable loadings for interpretation.
 
 # behav 0.5 (2025-11-05)
 
