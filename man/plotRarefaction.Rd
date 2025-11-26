@@ -13,7 +13,7 @@ plotRarefaction(
 )
 }
 \arguments{
-\item{x}{A data frame created by \code{\link[=mergeBoris]{mergeBoris()}}, containing columns \code{animal}, \code{Behavior},
+\item{x}{A data frame created by \code{mergeBoris()}, containing columns \code{animal}, \code{Behavior},
 \code{file}, and \code{cumDuration}.}
 
 \item{zoo}{Character vector of text patterns used to recognise zoo files

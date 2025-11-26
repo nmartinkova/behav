@@ -12,7 +12,7 @@
 #' and age class (adult vs. juvenile).
 #'
 #'
-#' @param x A data frame created by [mergeBoris()], containing columns `animal`, `Behavior`,
+#' @param x A data frame created by \code{mergeBoris()}, containing columns `animal`, `Behavior`,
 #'   `file`, and `cumDuration`.
 #' @param zoo Character vector of text patterns used to recognise zoo files
 #'   (default includes `"Zoo"`, `"Beekse"`, `"Safaripark"`, `"Tiergarten"`).

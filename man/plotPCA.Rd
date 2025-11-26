@@ -12,7 +12,7 @@ plotPCA(
 )
 }
 \arguments{
-\item{x}{A data frame created by \code{\link[=mergeBoris]{mergeBoris()}}, containing columns \code{animal}, \code{Behavior},
+\item{x}{A data frame created by \code{mergeBoris()}, containing columns \code{animal}, \code{Behavior},
 \code{file}, and \code{cumDuration}.}
 
 \item{zoo}{Character vector of text patterns used to recognise zoo files
@@ -29,8 +29,8 @@ tones representing juveniles.}
 \value{
 Invisibly returns a list containing:
 \itemize{
-\item \code{pca} — the PCA result (\code{prcomp} object)
-\item \code{data} — the Hellinger-transformed behavioural proportion matrix
+\item \code{pca} - the PCA result (\code{prcomp} object)
+\item \code{data} - the Hellinger-transformed behavioural proportion matrix
 }
 }
 \description{
@@ -63,13 +63,17 @@ The function creates three panels:
 
 \strong{Note:} If you receive the error
 \code{"Error in plot.new(): figure margins too large"},
-enlarge the plotting window or output device (e.g., use \code{pdf(..., width=10, height=12)}
+enlarge the plotting window or output device (e.g., use \code{pdf(..., width = 10, height = 12)}
 or a larger image size) before running the function.
 }
 \examples{
 \dontrun{
 dat <- read.table("Data/elephantBehaviour.txt", header = TRUE, sep = "\t")
-plotPCA(dat)
+res <- plotPCA(dat)
+# To view variable loadings, use:
+res$pca
+# To view the Hellinger-transformed behavioural proportion matrix, use:
+res$data
 }
 
 }

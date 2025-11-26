@@ -30,17 +30,21 @@
 #'
 #' **Note:** If you receive the error
 #' `"Error in plot.new(): figure margins too large"`,
-#' enlarge the plotting window or output device (e.g., use `pdf(..., width=10, height=12)`
+#' enlarge the plotting window or output device (e.g., use `pdf(..., width = 10, height = 12)`
 #' or a larger image size) before running the function.
 #'
 #' @return Invisibly returns a list containing:
-#' * `pca` — the PCA result (`prcomp` object)
-#' * `data` — the Hellinger-transformed behavioural proportion matrix
+#' * `pca` - the PCA result (`prcomp` object)
+#' * `data` - the Hellinger-transformed behavioural proportion matrix
 #'
 #' @examples
 #' \dontrun{
 #' dat <- read.table("Data/elephantBehaviour.txt", header = TRUE, sep = "\t")
-#' plotPCA(dat)
+#' res <- plotPCA(dat)
+#' # To view variable loadings, use:
+#' res$pca
+#' # To view the Hellinger-transformed behavioural proportion matrix, use:
+#' res$data
 #' }
 #'
 #' @export
@@ -49,7 +53,8 @@ plotPCA <- function(
     x,
     zoo = c("Zoo", "Beekse", "Safaripark", "Tiergarten"),
     age = c("Mládě", "Zyqarri"),
-    cols = c("#3C8ABF", "#A1BCD7", "#768D1A", "#B1BE94")) {
+    cols = c("#3C8ABF", "#A1BCD7", "#768D1A", "#B1BE94")    
+    ) {
   # remove non-behaviour rows
   x <- x[x$Behavior != "Mimo dohled", ]
 
@@ -107,6 +112,7 @@ plotPCA <- function(
   image(1:(nrow(pca$rotation) + 1), 1:(npcs + 1), abs(pca$rotation[, 1:npcs]),
     axes = F, xlab = "", ylab = ""
   )
+axis(2, at = 1.5:(npcs + .5), labels = colnames(pca)[1:npcs], las = 1)
   axis(1, at = (1:nrow(pca$rotation)) + .5, labels = rownames(pca$rotation), las = 2, cex.axis = .8)
   for (i in 1:nrow(pca$rotation)) {
     for (j in 1:npcs) {
