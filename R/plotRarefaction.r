@@ -43,7 +43,7 @@
 #' against the *fraction of total observation time* (x-axis),
 #' allowing comparisons of how quickly new behaviours appear between groups.
 #' @return Invisibly returns the input data frame `x` with extra columns indicating which
-#' animals were categorised as zoo vs. wild in column `zoo` and adult vs. juvenile in 
+#' animals were categorised as zoo vs. wild in column `zoo` and adult vs. juvenile in
 #' column `age`. The function produces a plot with four curves:
 #' blue tones for zoo animals, green tones for wild animals, solid lines for adults, and
 #' lighter lines for juveniles.
@@ -56,12 +56,11 @@
 #'
 #' @export
 plotRarefaction <- function(
-  x,
-  zoo = c("Zoo", "Beekse", "Safaripark", "Tiergarten"),
-  age = c("Mládě", "Zyqarri"),
-  cols = c("#3C8ABF", "#A1BCD7", "#768D1A", "#B1BE94"),
-  nBoot = 500
-) {
+    x,
+    zoo = c("Zoo", "Beekse", "Safaripark", "Tiergarten"),
+    age = c("Mládě", "Zyqarri"),
+    cols = c("#3C8ABF", "#A1BCD7", "#768D1A", "#B1BE94"),
+    nBoot = 500) {
   # remove non-behaviour rows
   x <- x[x$Behavior != "Mimo dohled", ]
 
@@ -77,23 +76,28 @@ plotRarefaction <- function(
   ## ---------------------------
   timeSliceRarefaction <- function(datInd) {
     startTime <- datInd$cumDuration - datInd$duration
-    endTime   <- datInd$cumDuration
-    Tobs      <- max(datInd$cumDuration, na.rm = TRUE)
+    endTime <- datInd$cumDuration
+    Tobs <- max(datInd$cumDuration, na.rm = TRUE)
 
     windowRichness <- function(winStart, winEnd) {
       overlaps <- (startTime < winEnd) & (endTime > winStart)
-      if (!any(overlaps)) return(0L)
+      if (!any(overlaps)) {
+        return(0L)
+      }
       length(unique(datInd$Behavior[overlaps]))
     }
 
     meanRich <- numeric(length(fracs))
-    lowRich  <- numeric(length(fracs))
+    lowRich <- numeric(length(fracs))
     highRich <- numeric(length(fracs))
 
     for (k in seq_along(fracs)) {
       f <- fracs[k]
       w <- f * Tobs
-      if (w <= 0) { meanRich[k] <- lowRich[k] <- highRich[k] <- 0; next }
+      if (w <= 0) {
+        meanRich[k] <- lowRich[k] <- highRich[k] <- 0
+        next
+      }
 
       # bootstrap moving time windows
       if (w >= Tobs) {
@@ -109,7 +113,7 @@ plotRarefaction <- function(
       }
 
       meanRich[k] <- mean(boots)
-      lowRich[k]  <- quantile(boots, 0.025, names = FALSE)
+      lowRich[k] <- quantile(boots, 0.025, names = FALSE)
       highRich[k] <- quantile(boots, 0.975, names = FALSE)
     }
 
@@ -122,8 +126,8 @@ plotRarefaction <- function(
   groupList <- list()
   k <- 1
 
-  for (z in c(TRUE, FALSE)) {    # ZOO vs Wild
-    for (a in c(TRUE, FALSE)) {  # Adult vs Juvenile
+  for (z in c(TRUE, FALSE)) { # ZOO vs Wild
+    for (a in c(TRUE, FALSE)) { # Adult vs Juvenile
       inds <- unique(x$animal[x$zoo == z & x$adult == a])
       if (length(inds) == 0) next
 
@@ -135,12 +139,12 @@ plotRarefaction <- function(
 
       # average across individuals in the group
       matMean <- do.call(cbind, lapply(indCurves, `[[`, "mean"))
-      matLow  <- do.call(cbind, lapply(indCurves, `[[`, "low"))
+      matLow <- do.call(cbind, lapply(indCurves, `[[`, "low"))
       matHigh <- do.call(cbind, lapply(indCurves, `[[`, "high"))
 
       groupList[[k]] <- data.frame(
         groupMean = rowMeans(matMean, na.rm = TRUE),
-        groupLow  = rowMeans(matLow,  na.rm = TRUE),
+        groupLow  = rowMeans(matLow, na.rm = TRUE),
         groupHigh = rowMeans(matHigh, na.rm = TRUE)
       )
       k <- k + 1
@@ -151,26 +155,30 @@ plotRarefaction <- function(
   ## Plot
   ## ---------------------------
   xvals <- fracs # * max(x$cumDuration, na.rm = TRUE)
-  ylim  <- c(0, max(sapply(groupList, function(g) max(g, na.rm = TRUE))))
+  ylim <- c(0, max(sapply(groupList, function(g) max(g, na.rm = TRUE))))
 
-  plot(1, type = "n",
-       xlim = c(0, 1),
-       ylim = ylim,
-       xlab = "Fraction of total observation time",
-       ylab = "Mean behavioural richness",
-       las = 1)
+  plot(1,
+    type = "n",
+    xlim = c(0, 1),
+    ylim = ylim,
+    xlab = "Fraction of total observation time",
+    ylab = "Mean behavioural richness",
+    las = 1
+  )
 
   for (i in seq_along(groupList)) {
     polygon(c(xvals, rev(xvals)),
-            c(groupList[[i]]$groupHigh, rev(groupList[[i]]$groupLow)),
-            col = adjustcolor(cols[i], alpha.f = 0.25),
-            border = NA)
+      c(groupList[[i]]$groupHigh, rev(groupList[[i]]$groupLow)),
+      col = adjustcolor(cols[i], alpha.f = 0.25),
+      border = NA
+    )
     lines(xvals, groupList[[i]]$groupMean, col = cols[i], lwd = 2)
   }
 
   legend("bottomright",
-         legend = c("ZOO adult", "ZOO juvenile", "Wild adult", "Wild juvenile"),
-         col = cols, lwd = 2, bty = "n")
+    legend = c("ZOO adult", "ZOO juvenile", "Wild adult", "Wild juvenile"),
+    col = cols, lwd = 2, bty = "n"
+  )
 
   invisible(x)
 }

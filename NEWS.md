@@ -1,3 +1,8 @@
+# behav 0.6.1 (2026-01-05)
+
+* Modified `mergeBoris` to include a column with partners for dyadic interactions.
+
+
 # behav 0.6 (2025-11-26)
 
 * Added new function `calculateDyadicMetrics` that calculates metrics of dyadic interactions for all partner pairs.

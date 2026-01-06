@@ -79,7 +79,7 @@ stronger partner preferences.
 \dontrun{
 dat <- read.table("Data/elephantBehaviour.txt", header = TRUE, sep = "\t")
 out <- calculateDyadicMetrics(dat, partnerCol = "partner")
-out$dyadicSummary   # view dyadic table
+out$dyadicSummary # view dyadic table
 }
 
 }

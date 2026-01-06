@@ -25,28 +25,28 @@
 #'
 #' The function then calculates:
 #'
-#' \strong{1. Directed adjacency matrix}  
-#' The total duration that individual A directed towards individual B.  
+#' \strong{1. Directed adjacency matrix}
+#' The total duration that individual A directed towards individual B.
 #' This describes the strength of one-way interactions.
 #'
-#' \strong{2. Asymmetry matrix}  
-#' The difference between \deqn{A \to B} and \deqn{B \to A}.  
+#' \strong{2. Asymmetry matrix}
+#' The difference between \deqn{A \to B} and \deqn{B \to A}.
 #' Positive values indicate that A interacts more with B than vice versa,
 #' which is useful for describing dominance or caregiving asymmetry.
 #'
-#' \strong{3. Reciprocity matrix}  
-#' The level of balance between two individuals:  
-#' \deqn{Rec = min(A \to B, B \to A) / max(A \to B, B \to A)}  
+#' \strong{3. Reciprocity matrix}
+#' The level of balance between two individuals:
+#' \deqn{Rec = min(A \to B, B \to A) / max(A \to B, B \to A)}
 #' Values close to 1 indicate mutually exchanged interactions; values near 0
 #' show one-sided or unreturned interactions.
 #'
-#' \strong{4. Partner preference matrix}  
+#' \strong{4. Partner preference matrix}
 #' For each individual, the adjacency matrix is normalised by row so that all
 #' outgoing interactions sum to 1. Each value represents the proportion of an
-#' individual's total dyadic time allocated to each partner.  
+#' individual's total dyadic time allocated to each partner.
 #' This highlights preferred partners or uneven social focus.
 #'
-#' \strong{5. Dyadic summary table}  
+#' \strong{5. Dyadic summary table}
 #' A compact table with one row per pair (A,B), including directed durations,
 #' asymmetry, and reciprocity. This format is convenient for interpretation,
 #' reporting, or plotting social networks.
@@ -68,37 +68,34 @@
 #' \dontrun{
 #' dat <- read.table("Data/elephantBehaviour.txt", header = TRUE, sep = "\t")
 #' out <- calculateDyadicMetrics(dat, partnerCol = "partner")
-#' out$dyadicSummary   # view dyadic table
+#' out$dyadicSummary # view dyadic table
 #' }
 #'
 #' @export
 calculateDyadicMetrics <- function(
     x,
     dyadic = NULL,
-    partnerCol = "partner"
-) {
-
-if(is.null(dyadic)){
-dyadic <- c(
-  "Být poblíž jiného jedince",
-  "Čichání a dotyk na těle druhého jedince",                            
- "Čichání ke genitáliím druhého jedince",
-"Dotyk chobotem do tlamy druhého jedince",
-"Hraní si mláděte s jiným mládětem",
-"Natažení chobotu k druhému slonovi",
-"Odehnání jiného zvířete",                                              
-"Odehnání níže postaveného jedince",                                   
-"Odhánění níže postaveného jedince (krok , pohození hlavou proti němu)",
-"Podrbání se o druhého jedince",
-"Položení chobotu nebo hlavy na záda druhého slona",
-"Přetlačování samců",
-"Samice se nastavuje samci",                                           
- "Slůně saje mléko/slonice kojí mládě",
-"Tlačení před sebou, odtlačení nebo štouchání druhého jedince",        
-"Ústup  jednoho slona před druhým"
-)
-
-}
+    partnerCol = "partner") {
+  if (is.null(dyadic)) {
+    dyadic <- c(
+      "Být poblíž jiného jedince",
+      "Čichání a dotyk na těle druhého jedince",
+      "Čichání ke genitáliím druhého jedince",
+      "Dotyk chobotem do tlamy druhého jedince",
+      "Hraní si mláděte s jiným mládětem",
+      "Natažení chobotu k druhému slonovi",
+      "Odehnání jiného zvířete",
+      "Odehnání níže postaveného jedince",
+      "Odhánění níže postaveného jedince (krok , pohození hlavou proti němu)",
+      "Podrbání se o druhého jedince",
+      "Položení chobotu nebo hlavy na záda druhého slona",
+      "Přetlačování samců",
+      "Samice se nastavuje samci",
+      "Slůně saje mléko/slonice kojí mládě",
+      "Tlačení před sebou, odtlačení nebo štouchání druhého jedince",
+      "Ústup  jednoho slona před druhým"
+    )
+  }
   ## -------------------------
   ## 1. Filter dyadic rows
   ## -------------------------
@@ -110,12 +107,11 @@ dyadic <- c(
 
   if (any(is.na(x[[partnerCol]]))) {
     warning("Niektore dyadicke spravania nemaju uvedeneho partnera. Mazem ich.")
-  x <- x[!is.na(x[[partnerCol]]) & x[[partnerCol]] != "", ]
-
+    x <- x[!is.na(x[[partnerCol]]) & x[[partnerCol]] != "", ]
   }
 
   ## focal and partner IDs
- focal  <- x$animal
+  focal <- x$animal
   partner <- x[[partnerCol]]
 
   animals <- sort(unique(c(focal, partner)))
@@ -124,9 +120,10 @@ dyadic <- c(
   ## 2. Adjacency matrix (directed)
   ## -------------------------
   A <- matrix(0,
-              nrow = length(animals),
-              ncol = length(animals),
-              dimnames = list(animals, animals))
+    nrow = length(animals),
+    ncol = length(animals),
+    dimnames = list(animals, animals)
+  )
 
   # accumulate durations of directed interactions
   for (i in seq_len(nrow(x))) {
@@ -144,9 +141,10 @@ dyadic <- c(
   ## Rec = min(A -> B, B -> A) / max(A -> B, B -> A)
   ## -------------------------
   Rec <- matrix(NA,
-                nrow = length(animals),
-                ncol = length(animals),
-                dimnames = list(animals, animals))
+    nrow = length(animals),
+    ncol = length(animals),
+    dimnames = list(animals, animals)
+  )
 
   for (a in animals) {
     for (b in animals) {

@@ -81,8 +81,10 @@ switch behaviours more frequently than adults.
 \examples{
 \dontrun{
 dat <- read.table("Data/elephantBehaviour.txt", header = TRUE, sep = "\t")
-res <- calculateMetrics(dat, plotMetrics = TRUE,
-                        whichPlot = c("Shannon", "Hill"))
+res <- calculateMetrics(dat,
+  plotMetrics = TRUE,
+  whichPlot = c("Shannon", "Hill")
+)
 head(res)
 }
 

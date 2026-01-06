@@ -9,8 +9,11 @@
 
 
 bin_duration <-
-function(data, event){
-	if(data["events"] == event){	vect = rep(1, data["duration"]) }
-	else{ vect = rep(0, data["duration"])	}
-	return(vect)
-}
+  function(data, event) {
+    if (data["events"] == event) {
+      vect <- rep(1, data["duration"])
+    } else {
+      vect <- rep(0, data["duration"])
+    }
+    return(vect)
+  }

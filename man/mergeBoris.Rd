@@ -40,6 +40,7 @@ For each animal–behaviour combination the following variables are returned:
 \item \code{duration} – duration of the behavioural event (s),
 \item \code{cumDuration} – cumulative duration within the observation,
 \item \code{freq} – relative frequency of the behaviour,
+\item \code{partner} - partner animal for dyadic interactions,
 \item \code{file} – source file name.
 }
 

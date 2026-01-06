@@ -7,11 +7,11 @@
 #' @export
 
 bin_event <-
-function(tab, event, save = TRUE, file="bin.vector"){
-	if(missing(event)){
-		event <- tab$events[1]
-	}
-	vect = unname(unlist(apply(tab, 1, FUN = function(x) bin_duration(x, event = event))))
-	cat(vect,file = paste0(file, event, ".txt"))
-	return(vect)
-}
+  function(tab, event, save = TRUE, file = "bin.vector") {
+    if (missing(event)) {
+      event <- tab$events[1]
+    }
+    vect <- unname(unlist(apply(tab, 1, FUN = function(x) bin_duration(x, event = event))))
+    cat(vect, file = paste0(file, event, ".txt"))
+    return(vect)
+  }

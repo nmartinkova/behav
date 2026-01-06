@@ -53,8 +53,7 @@ plotPCA <- function(
     x,
     zoo = c("Zoo", "Beekse", "Safaripark", "Tiergarten"),
     age = c("Mládě", "Zyqarri"),
-    cols = c("#3C8ABF", "#A1BCD7", "#768D1A", "#B1BE94")    
-    ) {
+    cols = c("#3C8ABF", "#A1BCD7", "#768D1A", "#B1BE94")) {
   # remove non-behaviour rows
   x <- x[x$Behavior != "Mimo dohled", ]
 
@@ -112,7 +111,7 @@ plotPCA <- function(
   image(1:(nrow(pca$rotation) + 1), 1:(npcs + 1), abs(pca$rotation[, 1:npcs]),
     axes = F, xlab = "", ylab = ""
   )
-axis(2, at = 1.5:(npcs + .5), labels = colnames(pca)[1:npcs], las = 1)
+  axis(2, at = 1.5:(npcs + .5), labels = colnames(pca)[1:npcs], las = 1)
   axis(1, at = (1:nrow(pca$rotation)) + .5, labels = rownames(pca$rotation), las = 2, cex.axis = .8)
   for (i in 1:nrow(pca$rotation)) {
     for (j in 1:npcs) {

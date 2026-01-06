@@ -3,7 +3,7 @@
 #' This function summarises each individual's behaviour using a set of diversity
 #' and temporal metrics, allowing comparison between elephants observed in zoos
 #' and in the wild, and between adults and juveniles.
-#' 
+#'
 #' It computes indices describing both how many different behaviours were
 #' expressed and how evenly the animal distributed its time among them,
 #' as well as the *temporal structure* of its activity.
@@ -21,7 +21,7 @@
 #'
 #' @details
 #' The function removes the `"Mimo dohled"` category and computes, for each animal:
-#' 
+#'
 #' * **timeOnCamera** – Total duration (s) during which the animal was visible and scored.
 #' * **ShannonH** – Shannon diversity index.
 #'   Quantifies overall behavioural diversity, combining both richness (number of behaviours)
@@ -58,8 +58,10 @@
 #' @examples
 #' \dontrun{
 #' dat <- read.table("Data/elephantBehaviour.txt", header = TRUE, sep = "\t")
-#' res <- calculateMetrics(dat, plotMetrics = TRUE,
-#'                         whichPlot = c("Shannon", "Hill"))
+#' res <- calculateMetrics(dat,
+#'   plotMetrics = TRUE,
+#'   whichPlot = c("Shannon", "Hill")
+#' )
 #' head(res)
 #' }
 #'
@@ -72,10 +74,11 @@ calculateMetrics <- function(
     whichPlot = "ShannonH",
     cols = c("#3C8ABF", "#A1BCD7", "#768D1A", "#B1BE94")) {
   # match plotting
-metricNames <- c("ShannonH", "HillD2", "PielouEvenness", "transitionsPerHour", "medianBout")
+  metricNames <- c("ShannonH", "HillD2", "PielouEvenness", "transitionsPerHour", "medianBout")
   whichPlot <- metricNames[pmatch(whichPlot, metricNames, duplicates.ok = TRUE)]
   whichPlot <- whichPlot[!is.na(whichPlot)]
-  if (length(whichPlot) == 0){ warning("Take indexy nemam. Nekreslim.")
+  if (length(whichPlot) == 0) {
+    warning("Take indexy nemam. Nekreslim.")
   }
   # remove non-behaviour rows
   x <- x[x$Behavior != "Mimo dohled", ]

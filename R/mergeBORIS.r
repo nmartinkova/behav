@@ -27,6 +27,7 @@
 #'   \item \code{duration} – duration of the behavioural event (s),
 #'   \item \code{cumDuration} – cumulative duration within the observation,
 #'   \item \code{freq} – relative frequency of the behaviour,
+#'   \item \code{partner} - partner animal for dyadic interactions,
 #'   \item \code{file} – source file name.
 #' }
 #'
@@ -74,6 +75,15 @@ mergeBoris <- function(files, outputFile) {
     }
 
 
+    # check that data has a Partner
+    if ("Modifier..1" %in% colnames(dat)) {
+      dat$partner <- dat$Modifier..1
+      dat$partner[dat$partner == ""] <- NA
+    } else {
+      dat$partner <- NA
+    }
+
+
     # check what kind of data it has
     if ("Duration..s." %in% colnames(dat)) {
       suppressWarnings(dat$duration <- as.numeric(dat[, "Duration..s."]))
@@ -92,7 +102,7 @@ mergeBoris <- function(files, outputFile) {
 
         vsetko <- rbind(
           vsetko,
-          dat1[, c("animal", "Behavior", "duration", "cumDuration", "freq", "file")]
+          dat1[, c("animal", "Behavior", "duration", "cumDuration", "freq", "partner", "file")]
         )
       }
     } else {
@@ -115,7 +125,7 @@ mergeBoris <- function(files, outputFile) {
 
         vsetko <- rbind(
           vsetko,
-          dat1[, c("animal", "Behavior", "duration", "cumDuration", "freq", "file")]
+          dat1[, c("animal", "Behavior", "duration", "cumDuration", "freq", "partner", "file")]
         )
       }
     }
@@ -124,6 +134,7 @@ mergeBoris <- function(files, outputFile) {
   # remove whitespace around behaviours and animal codes
   vsetko$Behavior <- sub("^[[:space:]]+|[[:space:]]+$", "", vsetko$Behavior, perl = TRUE)
   vsetko$animal <- sub("^[[:space:]]+|[[:space:]]+$", "", vsetko$animal, perl = TRUE)
+  vsetko$partner <- sub("^[[:space:]]+|[[:space:]]+$", "", vsetko$partner, perl = TRUE)
 
   if (is.null(vsetko)) stop("No valid data found in input files.")
   write.table(vsetko, file = outputFile, sep = "\t", row.names = FALSE)
