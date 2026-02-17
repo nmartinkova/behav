@@ -47,13 +47,16 @@
 #' res$data
 #' }
 #'
+#' @importFrom graphics axis box boxplot image layout par
+#' @importFrom stats median prcomp quantile runif
 #' @export
 
 plotPCA <- function(
-    x,
-    zoo = c("Zoo", "Beekse", "Safaripark", "Tiergarten"),
-    age = c("Mládě", "Zyqarri"),
-    cols = c("#3C8ABF", "#A1BCD7", "#768D1A", "#B1BE94")) {
+  x,
+  zoo = c("Zoo", "Beekse", "Safaripark", "Tiergarten"),
+  age = c("Mládě", "Zyqarri"),
+  cols = c("#3C8ABF", "#A1BCD7", "#768D1A", "#B1BE94")
+) {
   # remove non-behaviour rows
   x <- x[x$Behavior != "Mimo dohled", ]
 
@@ -133,8 +136,6 @@ plotPCA <- function(
   )
   axis(4, las = 1)
   box()
-
-
 
 
   invisible(list(pca = pca, data = p.hell))

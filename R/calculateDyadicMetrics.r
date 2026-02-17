@@ -73,9 +73,10 @@
 #'
 #' @export
 calculateDyadicMetrics <- function(
-    x,
-    dyadic = NULL,
-    partnerCol = "partner") {
+  x,
+  dyadic = NULL,
+  partnerCol = "partner"
+) {
   if (is.null(dyadic)) {
     dyadic <- c(
       "Být poblíž jiného jedince",
@@ -132,7 +133,7 @@ calculateDyadicMetrics <- function(
 
   ## -------------------------
   ## 3. Asymmetry matrix
-  ## asym(A,B) = A -> B – B -> A
+  ## asym(A,B) = A -> B - B -> A
   ## -------------------------
   Asym <- A - t(A)
 

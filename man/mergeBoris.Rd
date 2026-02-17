@@ -4,7 +4,12 @@
 \alias{mergeBoris}
 \title{Merge BORIS behavioural observation files}
 \usage{
-mergeBoris(files, outputFile)
+mergeBoris(
+  files,
+  outputFile,
+  zoo = c("Zoo", "Beekse", "Safaripark", "Tiergarten"),
+  age = c("Mládě", "Zyqarri")
+)
 }
 \arguments{
 \item{files}{Character vector giving the paths to BORIS export files.
@@ -15,6 +20,12 @@ Files can be a mix of Excel (\code{.xlsx}) and tab-delimited text
 \item{outputFile}{Character string giving the path and name of the file where
 the merged table will be saved. The directory is created automatically if
 it does not exist.}
+
+\item{zoo}{Character vector of text patterns used to recognise zoo files
+(default includes \code{"Zoo"}, \code{"Beekse"}, \code{"Safaripark"}, \code{"Tiergarten"}).}
+
+\item{age}{Character vector of text patterns identifying juveniles in the \code{animal} column
+(default includes \code{"Mládě"}, \code{"Zyqarri"}).}
 }
 \value{
 A tab-delimited text file is written to \code{outputFile}. The function does
@@ -35,17 +46,17 @@ The function automatically recognises whether a file contains durations
 for start/stop data it calculates durations as the difference between
 consecutive time values.
 
-For each animal–behaviour combination the following variables are returned:
+For each animal-behaviour combination the following variables are returned:
 \itemize{
-\item \code{duration} – duration of the behavioural event (s),
-\item \code{cumDuration} – cumulative duration within the observation,
-\item \code{freq} – relative frequency of the behaviour,
+\item \code{duration} - duration of the behavioural event (s),
+\item \code{cumDuration} - cumulative duration within the observation,
+\item \code{freq} - relative frequency of the behaviour,
 \item \code{partner} - partner animal for dyadic interactions,
-\item \code{file} – source file name.
+\item \code{file} - source file name.
 }
 
 The output table can be used for further analyses, such as calculating
-Shannon’s diversity index, Simpson’s index, or summarising behavioural
+Shannon's diversity index, Simpson's index, or summarising behavioural
 richness for each individual.
 }
 \note{

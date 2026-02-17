@@ -1,3 +1,9 @@
+# behav 0.7
+
+* Added new function `plotSocialNetwork` for plotting dyadic adjacency graph.
+* Modified `mergeBoris` to unify names in the partner column, and add grouping columns zoo, adult and group.
+
+
 # behav 0.6.1 (2026-01-05)
 
 * Modified `mergeBoris` to include a column with partners for dyadic interactions.

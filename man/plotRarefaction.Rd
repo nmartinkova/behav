@@ -56,7 +56,7 @@ For each individual, total observation time is divided into a series of 50
 fractional time slices ranging from 1\% to 100\%.
 For each slice width \emph{w = fT}, where \emph{f} is a fraction and \emph{T} is the total
 observation time for the individuals, random time windows of length \emph{w} are repeatedly drawn
-across the individual’s observation period.
+across the individual's observation period.
 A behaviour counts as observed in that window if its duration overlaps with the window in time.
 
 For each time slice, the function computes the mean number of unique behaviours and the

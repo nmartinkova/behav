@@ -52,22 +52,22 @@ Optionally, it can visualise the metrics as grouped boxplots.
 
 The function removes the \code{"Mimo dohled"} category and computes, for each animal:
 \itemize{
-\item \strong{timeOnCamera} – Total duration (s) during which the animal was visible and scored.
+\item \strong{timeOnCamera} - Total duration (s) during which the animal was visible and scored.
 \item \strong{ShannonH} – Shannon diversity index.
 Quantifies overall behavioural diversity, combining both richness (number of behaviours)
 and evenness (balance in time spent on each behaviour).
 Higher values indicate a broader and more evenly distributed behavioural repertoire.
-\item \strong{HillD2} – Simpson reciprocal diversity (Hill number of order 2).
+\item \strong{HillD2} - Simpson reciprocal diversity (Hill number of order 2).
 Expressed as the \emph{effective number of equally common behaviours}.
 A value of 5 means the activity distribution is as diverse as if five behaviours
 were expressed equally often.
-\item \strong{PielouEvenness} – Pielou’s evenness index.
+\item \strong{PielouEvenness} - Pielou’s evenness index.
 Measures how equally the animal divides its time among all behaviours.
 Values near 1 denote balanced activity; low values indicate dominance of few behaviours.
-\item \strong{transitionsPerHour} – Frequency of behavioural switches.
+\item \strong{transitionsPerHour} - Frequency of behavioural switches.
 The number of changes between behaviours per hour of observation.
 Reflects temporal flexibility: higher rates imply frequent switching between activities.
-\item \strong{medianBout} – Median duration (s) of individual behaviour bouts.
+\item \strong{medianBout} - Median duration (s) of individual behaviour bouts.
 Represents the typical length of a continuous behaviour.
 Shorter bouts indicate more dynamic behaviour; longer bouts suggest more persistent activity.
 }

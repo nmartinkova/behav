@@ -1,7 +1,7 @@
 Package: behav
 Type: Package
 Title: Score behavioral patterns in time
-Version: 0.6.1
+Version: 0.7
 Authors@R: c( 
     person(given = "Natalia", family = "Martinkova", email = "martinkova@ivb.cz", 
     role = c("aut", "cre", "cph")))
@@ -12,7 +12,8 @@ Description: Play video in an external application, score the observed behaviora
 	in R. Works with one letter or one number codes for different behaviors. Provides 
 	additional analyses for investigating animal behaviour.
 License: GPL-3
-Depends: R (>= 3.4.0)
+Depends: R (>= 3.4.0),
+    igraph
 Encoding: UTF-8
 LazyData: true
 RoxygenNote: 7.3.3

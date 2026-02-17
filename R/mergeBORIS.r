@@ -14,6 +14,7 @@
 #' @param outputFile Character string giving the path and name of the file where
 #'   the merged table will be saved. The directory is created automatically if
 #'   it does not exist.
+#' @inheritParams calculateMetrics
 #'
 #' @details
 #' The function automatically recognises whether a file contains durations
@@ -22,17 +23,17 @@
 #' for start/stop data it calculates durations as the difference between
 #' consecutive time values.
 #'
-#' For each animal–behaviour combination the following variables are returned:
+#' For each animal-behaviour combination the following variables are returned:
 #' \itemize{
-#'   \item \code{duration} – duration of the behavioural event (s),
-#'   \item \code{cumDuration} – cumulative duration within the observation,
-#'   \item \code{freq} – relative frequency of the behaviour,
+#'   \item \code{duration} - duration of the behavioural event (s),
+#'   \item \code{cumDuration} - cumulative duration within the observation,
+#'   \item \code{freq} - relative frequency of the behaviour,
 #'   \item \code{partner} - partner animal for dyadic interactions,
-#'   \item \code{file} – source file name.
+#'   \item \code{file} - source file name.
 #' }
 #'
 #' The output table can be used for further analyses, such as calculating
-#' Shannon’s diversity index, Simpson’s index, or summarising behavioural
+#' Shannon's diversity index, Simpson's index, or summarising behavioural
 #' richness for each individual.
 #'
 #' @return
@@ -54,7 +55,11 @@
 #' importFrom("utils", "install.packages")
 #' importFrom("readxl", "read_excel")
 #' @export
-mergeBoris <- function(files, outputFile) {
+mergeBoris <- function(
+  files, outputFile,
+  zoo = c("Zoo", "Beekse", "Safaripark", "Tiergarten"),
+  age = c("Mládě", "Zyqarri")
+) {
   # create output directory if missing
   if (basename(outputFile) != outputFile) {
     if (!dir.exists(dirname(outputFile))) dir.create(dirname(outputFile), recursive = TRUE)
@@ -82,6 +87,10 @@ mergeBoris <- function(files, outputFile) {
     } else {
       dat$partner <- NA
     }
+
+    # unify the partner names with animal names
+    dat$partner <- paste(dat[, "Observation.id"], dat[, "partner"], sep = "-")
+    dat$partner[grepl("-NA", dat$partner)] <- NA
 
 
     # check what kind of data it has
@@ -135,6 +144,12 @@ mergeBoris <- function(files, outputFile) {
   vsetko$Behavior <- sub("^[[:space:]]+|[[:space:]]+$", "", vsetko$Behavior, perl = TRUE)
   vsetko$animal <- sub("^[[:space:]]+|[[:space:]]+$", "", vsetko$animal, perl = TRUE)
   vsetko$partner <- sub("^[[:space:]]+|[[:space:]]+$", "", vsetko$partner, perl = TRUE)
+
+  # create group tags
+  vsetko$zoo <- grepl(paste(zoo, collapse = "|"), vsetko$file)
+  vsetko$adult <- !grepl(paste(age, collapse = "|"), vsetko$animal)
+  vsetko$group <- sub("-.+", "", vsetko$animal)
+  vsetko$group[vsetko$zoo] <- sub(" [0-9].+", "", vsetko$group[vsetko$zoo])
 
   if (is.null(vsetko)) stop("No valid data found in input files.")
   write.table(vsetko, file = outputFile, sep = "\t", row.names = FALSE)

@@ -22,26 +22,26 @@
 #' @details
 #' The function removes the `"Mimo dohled"` category and computes, for each animal:
 #'
-#' * **timeOnCamera** – Total duration (s) during which the animal was visible and scored.
+#' * **timeOnCamera** - Total duration (s) during which the animal was visible and scored.
 #' * **ShannonH** – Shannon diversity index.
 #'   Quantifies overall behavioural diversity, combining both richness (number of behaviours)
 #'   and evenness (balance in time spent on each behaviour).
 #'   Higher values indicate a broader and more evenly distributed behavioural repertoire.
 #'
-#' * **HillD2** – Simpson reciprocal diversity (Hill number of order 2).
+#' * **HillD2** - Simpson reciprocal diversity (Hill number of order 2).
 #'   Expressed as the *effective number of equally common behaviours*.
 #'   A value of 5 means the activity distribution is as diverse as if five behaviours
 #'   were expressed equally often.
 #'
-#' * **PielouEvenness** – Pielou’s evenness index.
+#' * **PielouEvenness** - Pielou’s evenness index.
 #'   Measures how equally the animal divides its time among all behaviours.
 #'   Values near 1 denote balanced activity; low values indicate dominance of few behaviours.
 #'
-#' * **transitionsPerHour** – Frequency of behavioural switches.
+#' * **transitionsPerHour** - Frequency of behavioural switches.
 #'   The number of changes between behaviours per hour of observation.
 #'   Reflects temporal flexibility: higher rates imply frequent switching between activities.
 #'
-#' * **medianBout** – Median duration (s) of individual behaviour bouts.
+#' * **medianBout** - Median duration (s) of individual behaviour bouts.
 #'   Represents the typical length of a continuous behaviour.
 #'   Shorter bouts indicate more dynamic behaviour; longer bouts suggest more persistent activity.
 #'
@@ -67,12 +67,13 @@
 #'
 #' @export
 calculateMetrics <- function(
-    x,
-    zoo = c("Zoo", "Beekse", "Safaripark", "Tiergarten"),
-    age = c("Mládě", "Zyqarri"),
-    plotMetrics = FALSE,
-    whichPlot = "ShannonH",
-    cols = c("#3C8ABF", "#A1BCD7", "#768D1A", "#B1BE94")) {
+  x,
+  zoo = c("Zoo", "Beekse", "Safaripark", "Tiergarten"),
+  age = c("Mládě", "Zyqarri"),
+  plotMetrics = FALSE,
+  whichPlot = "ShannonH",
+  cols = c("#3C8ABF", "#A1BCD7", "#768D1A", "#B1BE94")
+) {
   # match plotting
   metricNames <- c("ShannonH", "HillD2", "PielouEvenness", "transitionsPerHour", "medianBout")
   whichPlot <- metricNames[pmatch(whichPlot, metricNames, duplicates.ok = TRUE)]
@@ -84,9 +85,13 @@ calculateMetrics <- function(
   x <- x[x$Behavior != "Mimo dohled", ]
 
   # identify zoo/wild and adult/juvenile animals
-  x$zoo <- grepl(paste(zoo, collapse = "|"), x$file)
-  x$adult <- !grepl(paste(age, collapse = "|"), x$animal)
-
+  if (!all(c("zoo", "adult", "group") %in% colnames(x))) {
+    x$zoo <- grepl(paste(zoo, collapse = "|"), x$file)
+    x$adult <- !grepl(paste(age, collapse = "|"), x$animal)
+    x$group <- sub("-.+", "", x$animal)
+    x$group[x$zoo] <- sub(" [0-9].+", "", x$group[x$zoo])
+  }
+  
   res <- unique(x[, c("animal", "zoo", "adult", "file")])
   res[, c("timeOnCamera", "ShannonH", "HillD2", "PielouEvenness", "transitionsPerHour", "medianBout")] <- NA
 
