@@ -10,7 +10,8 @@ plotSocialNetwork(
   age = c("Mládě", "Zyqarri"),
   cols = c("#3C8ABF", "#A1BCD7", "#768D1A", "#B1BE94"),
   outputFile = NULL,
-  whichMatrix = "adjacency"
+  whichMatrix = "adjacency",
+  dyadic = NULL
 )
 }
 \arguments{
@@ -34,6 +35,10 @@ it does not exist.}
 
 \item{whichMatrix}{Character string specifying which matrix with dyadic interactions
 to plot. Default is adjacency.}
+
+\item{dyadic}{Optional character vector listing which behaviours should be
+treated as dyadic. If not supplied, a default list of typical dyadic
+elephant behaviours is used (touching, entwining trunks, pushing, etc.).}
 }
 \value{
 Invisibly returns the adjacency matrix \code{A}.

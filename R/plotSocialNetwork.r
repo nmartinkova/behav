@@ -7,6 +7,7 @@
 #' individuals that were never observed together.
 #'
 #' @inheritParams plotRarefaction
+#' @inheritParams calculateDyadicMetrics
 #' @param outputFile Character string giving the path and name of the file where the plot
 #'  will be saved. The directory is created automatically if
 #'   it does not exist.
@@ -68,7 +69,8 @@ plotSocialNetwork <- function(
   age = c("Mládě", "Zyqarri"),
   cols = c("#3C8ABF", "#A1BCD7", "#768D1A", "#B1BE94"),
   outputFile = NULL,
-  whichMatrix = "adjacency"
+  whichMatrix = "adjacency",
+  dyadic = NULL
 ) {
   # create folder for output if needed
   if (is.null(outputFile)) outputFile <- "socialNetwork.pdf"
@@ -112,7 +114,7 @@ plotSocialNetwork <- function(
     if (nrow(xsub) == 0) next
 
     ## compute dyadic metrics
-    dy <- calculateDyadicMetrics(xsub)
+    dy <- calculateDyadicMetrics(xsub, dyadic = dyadic)
     A <- dy[[whichMatrix]]
     
     animals <- rownames(A)
