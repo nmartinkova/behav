@@ -1,4 +1,9 @@
-# behav 0.7
+# behav 0.7.1 (2026-02-25)
+
+* Added argument `dyadic` to `plotSocialNetwork` to select behaviours to be included.
+* `calculateDyadicMetrics` now prints the list of included behaviours to standard output. 
+
+# behav 0.7 (2026-02-17)
 
 * Added new function `plotSocialNetwork` for plotting dyadic adjacency graph.
 * Modified `mergeBoris` to unify names in the partner column, and add grouping columns zoo, adult and group.

@@ -97,6 +97,9 @@ calculateDyadicMetrics <- function(
       "Ústup  jednoho slona před druhým"
     )
   }
+  
+  cat("Included dyadic behaviours:", dyadic, sep = "\n")
+  
   ## -------------------------
   ## 1. Filter dyadic rows
   ## -------------------------
